@@ -3,171 +3,847 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Om Bharadwa | Business Analyst</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Om Bharadwa — Business Analyst & Founder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0A0A0F;
+      --surface:  #111118;
+      --card:     #14141C;
+      --border:   #222230;
+      --gold:     #C9A84C;
+      --gold-dim: #8A6E2F;
+      --text:     #F0EDE8;
+      --muted:    #888799;
+      --faint:    #32324A;
     }
+
+    html { scroll-behavior: smooth; }
     body {
+      background: var(--bg);
+      color: var(--text);
       font-family: 'Inter', sans-serif;
-      background-color: #f2f4f8;
-      color: #333;
-      padding: 40px;
-    }
-    .container {
-      max-width: 960px;
-      margin: auto;
-      background-color: #fff;
-      border-radius: 12px;
-      padding: 50px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
-    h1 {
-      font-size: 40px;
-      font-weight: 700;
-      color: #2c3e50;
-      margin-bottom: 8px;
-    }
-    h2 {
-      font-size: 24px;
-      color: #1a73e8;
-      margin-top: 40px;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #e0e0e0;
-      padding-bottom: 5px;
-    }
-    h3 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-top: 25px;
-      color: #444;
-    }
-    ul, p {
-      font-size: 16px;
+      font-weight: 300;
       line-height: 1.7;
-      color: #555;
+      overflow-x: hidden;
     }
-    ul {
-      padding-left: 20px;
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 60px;
+      background: rgba(10,10,15,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
     }
-    .contact p, .links p {
-      font-size: 15px;
-      color: #555;
+    nav.scrolled { border-bottom-color: var(--border); }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 400; letter-spacing: 0.03em;
+      color: var(--text); text-decoration: none;
     }
-    .contact {
-      margin-top: 5px;
-      margin-bottom: 30px;
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+      transition: color 0.2s;
     }
-    .section {
-      margin-top: 40px;
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 60px; position: relative; overflow: hidden;
     }
-    a {
-      color: #1a73e8;
-      text-decoration: none;
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 72px 72px; opacity: 0.14; pointer-events: none;
     }
-    a:hover {
-      text-decoration: underline;
+    .hero-glow {
+      position: absolute; width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 68%);
+      top: 50%; left: 55%; transform: translate(-50%, -50%); pointer-events: none;
     }
-    .job-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 15px;
+    .hero-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 26px; position: relative;
     }
-    .job-title span {
-      font-weight: normal;
-      font-size: 15px;
-      color: #888;
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(4.2rem, 9vw, 9.5rem);
+      line-height: 0.93; color: var(--text);
+      position: relative; display: inline-block;
+    }
+    .hero-name::after {
+      content: ''; display: block; height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      width: 0; margin-top: 18px;
+      animation: ul-in 1.4s cubic-bezier(0.22,1,0.36,1) forwards 0.5s;
+    }
+    @keyframes ul-in { to { width: 100%; } }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-weight: 300;
+      font-size: clamp(1.1rem, 2.2vw, 1.8rem);
+      color: var(--muted); margin-top: 26px; margin-bottom: 16px;
+    }
+    .hero-bio {
+      max-width: 540px; font-size: 0.9rem;
+      color: var(--muted); line-height: 1.9; margin-bottom: 42px;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-meta {
+      display: flex; gap: 28px; margin-top: 52px;
+      padding-top: 32px; border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .hero-meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .hero-meta-label {
+      font-size: 0.62rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--faint);
+    }
+    .hero-meta-value { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      padding: 12px 30px; background: var(--gold); color: #0A0A0F;
+      font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; border: none;
+      cursor: pointer; text-decoration: none; display: inline-block;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-outline {
+      padding: 12px 30px; background: transparent; color: var(--text);
+      font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1px solid var(--border); cursor: pointer;
+      text-decoration: none; display: inline-block;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 100px 60px; }
+    .section-label {
+      font-size: 0.65rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+    }
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.08; margin-bottom: 52px;
+    }
+    .divider { width: 100%; height: 1px; background: var(--border); }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--surface); }
+    .timeline { display: flex; flex-direction: column; }
+    .timeline-item {
+      display: grid; grid-template-columns: 200px 1fr;
+      gap: 48px; padding: 44px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-meta { padding-top: 3px; }
+    .timeline-period {
+      font-size: 0.72rem; letter-spacing: 0.06em;
+      color: var(--gold); margin-bottom: 5px;
+    }
+    .timeline-company { font-size: 0.78rem; color: var(--muted); }
+    .timeline-location { font-size: 0.72rem; color: var(--faint); margin-top: 3px; }
+    .timeline-role {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem; font-weight: 400; margin-bottom: 14px;
+    }
+    .timeline-bullets { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .timeline-bullets li {
+      font-size: 0.85rem; color: var(--muted); line-height: 1.75;
+      padding-left: 16px; position: relative;
+    }
+    .timeline-bullets li::before {
+      content: '—'; position: absolute; left: 0; color: var(--gold-dim);
+      font-size: 0.7rem; top: 5px;
+    }
+    .timeline-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .tag {
+      font-size: 0.65rem; letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 4px 10px; border: 1px solid var(--faint); color: var(--muted);
+    }
+
+    /* ── ACHIEVEMENTS ── */
+    #achievements { padding: 100px 60px; }
+    .ach-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1px; background: var(--border);
+    }
+    .ach-card {
+      background: var(--bg); padding: 36px 32px;
+    }
+    .ach-icon { font-size: 1.4rem; margin-bottom: 14px; }
+    .ach-title {
+      font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
+    }
+    .ach-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.75; }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--surface); }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1px; background: var(--border);
+    }
+    .project-card {
+      background: var(--card); padding: 38px;
+      transition: background 0.2s; cursor: default;
+    }
+    .project-card:hover { background: #1A1A26; }
+    .project-num {
+      font-size: 0.6rem; letter-spacing: 0.18em;
+      color: var(--faint); margin-bottom: 24px;
+    }
+    .project-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 400; margin-bottom: 12px;
+    }
+    .project-desc {
+      font-size: 0.83rem; color: var(--muted); line-height: 1.78;
+    }
+    .project-badge {
+      display: inline-block; margin-top: 18px;
+      font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 10px; border: 1px solid var(--gold-dim); color: var(--gold);
+    }
+
+    /* ── SKILLS ── */
+    #skills { padding: 100px 60px; }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 44px;
+    }
+    .skill-group-title {
+      font-size: 0.67rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px;
+    }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: 9px; }
+    .chip {
+      font-size: 0.76rem; padding: 6px 13px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--muted); transition: border-color 0.2s, color 0.2s;
+    }
+    .chip:hover { border-color: var(--gold-dim); color: var(--text); }
+
+    /* ── EDUCATION & CERTS ── */
+    #education { background: var(--surface); padding: 100px 60px; }
+    .edu-cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+    .edu-list, .cert-list { display: flex; flex-direction: column; gap: 0; }
+    .edu-item, .cert-item {
+      padding: 24px 0; border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: start; gap: 16px;
+    }
+    .edu-item:first-child, .cert-item:first-child { padding-top: 0; }
+    .edu-degree {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-weight: 400; margin-bottom: 4px;
+    }
+    .edu-school { font-size: 0.8rem; color: var(--muted); }
+    .edu-year, .cert-year {
+      font-size: 0.72rem; color: var(--gold);
+      letter-spacing: 0.06em; flex-shrink: 0;
+    }
+    .cert-name {
+      font-size: 0.85rem; color: var(--text); margin-bottom: 4px; font-weight: 400;
+    }
+    .cert-issuer { font-size: 0.76rem; color: var(--muted); }
+
+    /* ── RESUME ── */
+    #resume {
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center; padding: 100px 60px;
+    }
+    .resume-box {
+      border: 1px solid var(--border); padding: 64px 72px;
+      max-width: 600px; width: 100%;
+    }
+    .resume-icon { font-size: 2.2rem; margin-bottom: 22px; }
+    .resume-box h2 {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: 2.4rem; margin-bottom: 12px;
+    }
+    .resume-box p {
+      font-size: 0.86rem; color: var(--muted);
+      margin-bottom: 36px; line-height: 1.85;
+    }
+    .resume-specs {
+      display: flex; justify-content: center; gap: 32px;
+      margin-bottom: 36px; flex-wrap: wrap;
+    }
+    .resume-spec { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+    .resume-spec-label {
+      font-size: 0.6rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--faint);
+    }
+    .resume-spec-val { font-size: 0.82rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--surface); padding: 100px 60px; }
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .contact-info p { font-size: 0.87rem; color: var(--muted); line-height: 1.85; margin-bottom: 36px; }
+    .contact-links { display: flex; flex-direction: column; gap: 12px; }
+    .contact-link {
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none; color: var(--muted); font-size: 0.83rem;
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--text); }
+    .contact-link-icon {
+      width: 34px; height: 34px; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; flex-shrink: 0;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label {
+      font-size: 0.65rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .form-input, .form-textarea {
+      background: var(--bg); border: 1px solid var(--border);
+      color: var(--text); font-family: 'Inter', sans-serif;
+      font-size: 0.87rem; padding: 12px 15px; outline: none; resize: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--gold-dim); }
+    .form-textarea { height: 124px; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 60px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-copy { font-size: 0.72rem; color: var(--faint); }
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--muted);
+    }
+
+    /* ── FADE UP ── */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section, #achievements, #skills, #education, #resume, #contact { padding: 72px 24px; }
+      #hero { padding: 0 24px; }
+      .timeline-item { grid-template-columns: 1fr; gap: 4px; }
+      .edu-cert-grid { grid-template-columns: 1fr; gap: 44px; }
+      .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+      .resume-box { padding: 40px 24px; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+      .hero-meta { gap: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-name::after { animation: none; width: 100%; }
+      .fade-up { opacity: 1; transform: none; transition: none; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Om Bharadwa</h1>
-    <div class="contact">
-      <p><strong>Phone:</strong> +91-9265786549 | <strong>Email:</strong> om.bharadwa@email.com</p>
-      <p><strong>Address:</strong> Ahmedabad, Gujarat, India</p>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">Om<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <p class="hero-eyebrow">Business Analyst · Founder · Builder</p>
+  <h1 class="hero-name">Om Bharadwa</h1>
+  <p class="hero-title">Founder & CEO, Clarivex.AI &nbsp;·&nbsp; Business Analyst</p>
+  <p class="hero-bio">
+    3+ years bridging global stakeholders and engineering teams — translating complex 
+    business needs into structured specifications, data-driven solutions, and products 
+    that actually ship. Now building Clarivex.AI from the ground up.
+  </p>
+  <div class="hero-ctas">
+    <a href="#contact" class="btn-primary">Get in Touch</a>
+    <a href="#resume" class="btn-outline">Download Resume</a>
+  </div>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Location</span>
+      <span class="hero-meta-value">Ahmedabad, Gujarat</span>
     </div>
-
-    <div class="section">
-      <h2>Professional Summary</h2>
-      <p>Experienced Business Analyst with 2+ years of expertise in gathering requirements, analyzing business processes, and delivering data-driven solutions. Skilled in SQL, advanced Excel, documentation, stakeholder management, and UAT. Proven in translating business needs into scalable, functional systems, especially in healthcare and pharmaceutical domains.</p>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Experience</span>
+      <span class="hero-meta-value">3+ Years</span>
     </div>
-
-    <div class="section">
-      <h2>Work Experience</h2>
-      <div class="job-title">
-        <h3>Sarjen System PVT LTD – Business Analyst</h3>
-        <span>Jan 2024 - Present</span>
-      </div>
-      <ul>
-        <li>Gathered and validated new requirements from stakeholders.</li>
-        <li>Documented client healthcare projects and performed UAT.</li>
-        <li>Maintained traceability and client communication through project lifecycle.</li>
-        <li>Prepared BRD, FRD, and User Manuals using Agile methodologies.</li>
-      </ul>
-
-      <div class="job-title">
-        <h3>Prof-Cess – Business Analyst Intern</h3>
-        <span>Jan 2023 - Dec 2024</span>
-      </div>
-      <ul>
-        <li>Assisted in gathering and analyzing stakeholder requirements.</li>
-        <li>Helped identify process gaps and supported UAT activities.</li>
-        <li>Participated in QA coordination and client reporting.</li>
-      </ul>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Domain</span>
+      <span class="hero-meta-value">Healthcare IT · Life Sciences · AI</span>
     </div>
-
-    <div class="section">
-      <h2>Education</h2>
-      <ul>
-        <li><strong>Marwadi University</strong> – B.Tech in Computer Engineering, CGPA: 6.28 (2024)</li>
-        <li><strong>Marwadi University</strong> – Diploma in Computer Engineering, CGPA: 7.54 (2021)</li>
-        <li><strong>Tata Chem DAV Public School</strong> – SSC: 69% (2018)</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>Technical Skills</h2>
-      <ul>
-        <li>SQL (Data querying & validation)</li>
-        <li>Advanced MS Excel (Pivot Tables, VLOOKUP, Functions)</li>
-        <li>MS Office Suite (Word, PowerPoint, Outlook)</li>
-        <li>Wireframing: Figma, Draw.io</li>
-        <li>Agile Tools: JIRA</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>Non-Technical Skills</h2>
-      <ul>
-        <li><strong>Business & Analytical:</strong> Requirement Analysis, UAT, BRD, FRD, GAP Analysis, Use Cases</li>
-        <li><strong>Soft Skills:</strong> Communication, Team Collaboration, Critical Thinking, Time Management</li>
-        <li><strong>Methodologies:</strong> Agile (Scrum), Waterfall, SDLC</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>Technical Profiles</h2>
-      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/om-bharadwa" target="_blank">linkedin.com/in/om-bharadwa</a></p>
-      <p><strong>GitHub:</strong> <a href="https://github.com/ombharadwa/Om-bharadwa-Business-analyst-resume-.git" target="_blank">github.com/ombharadwa</a></p>
-    </div>
-
-    <div class="section">
-      <h2>Certifications</h2>
-      <ul>
-        <li>AWS Academy Cloud Foundations – Amazon Web Services (2023)</li>
-        <li>Foundations of Project Management – Google (2024)</li>
-        <li>Business Analysis & Process Management – Coursera (2024)</li>
-        <li>Foundation of User Experience Design – Google (2024)</li>
-        <li>Foundations of Cybersecurity – Google (2024)</li>
-        <li>Social Media Data Analytics – University of Washington (2024)</li>
-      </ul>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Email</span>
+      <span class="hero-meta-value">ombharadwa1336@gmail.com</span>
     </div>
   </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label fade-up">Career</p>
+  <h2 class="section-heading fade-up">Work Experience</h2>
+  <div class="timeline">
+
+    <div class="timeline-item fade-up">
+      <div class="timeline-meta">
+        <p class="timeline-period">Jan 2024 — Apr 2026</p>
+        <p class="timeline-company">Sarjen Systems Pvt. Ltd.</p>
+        <p class="timeline-location">Ahmedabad, India</p>
+      </div>
+      <div>
+        <h3 class="timeline-role">Business Analyst</h3>
+        <ul class="timeline-bullets">
+          <li>Gathered and analyzed complex requirements for enterprise Life Sciences and Healthcare IT platforms; translated high-level needs into Epics, Feature Maps, and BDD-structured user stories.</li>
+          <li>Authored comprehensive BRDs, FRDs, and SRS documents; designed high-fidelity wireframes in Figma and mapped API/data integrations between distributed modules.</li>
+          <li>Used SQL to audit backend reporting logic, perform cross-system data mapping, validate stored procedures, and troubleshoot data anomalies.</li>
+          <li>Documented end-to-end workflows for regulated modules — audit trails, e-signatures, document control — ensuring compliance with 21 CFR Part 11 and GAMP 5.</li>
+          <li>Led UAT cycles, institutionalized RTM usage, and managed cross-functional defect triage pipelines in JIRA.</li>
+          <li>Conducted product demos, technical walkthroughs, and gap analysis presentations for international clients; drafted SoWs and effort estimations to accelerate pre-sales.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span class="tag">BRD / FRD / SRS</span>
+          <span class="tag">Agile / Scrum</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Figma</span>
+          <span class="tag">JIRA</span>
+          <span class="tag">21 CFR Part 11</span>
+          <span class="tag">GAMP 5</span>
+          <span class="tag">UAT</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-up">
+      <div class="timeline-meta">
+        <p class="timeline-period">Jan 2023 — Dec 2023</p>
+        <p class="timeline-company">Prof-Cess</p>
+        <p class="timeline-location">Distributed Team (5)</p>
+      </div>
+      <div>
+        <h3 class="timeline-role">Business Analyst</h3>
+        <ul class="timeline-bullets">
+          <li>Collaborated with senior analysts across locations to synthesize initial business workflows and user journeys.</li>
+          <li>Drafted functional documentation, process flows, and standardized UAT test scenarios via unified cloud documentation platforms.</li>
+          <li>Participated in discovery sessions to identify operational process gaps and recommend digital improvements.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span class="tag">Process Mapping</span>
+          <span class="tag">UAT</span>
+          <span class="tag">Documentation</span>
+          <span class="tag">Discovery</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-up">
+      <div class="timeline-meta">
+        <p class="timeline-period">2024 — Present</p>
+        <p class="timeline-company">Clarivex.AI</p>
+        <p class="timeline-location">Ahmedabad, India</p>
+      </div>
+      <div>
+        <h3 class="timeline-role">Founder & CEO</h3>
+        <ul class="timeline-bullets">
+          <li>Founded an AI-first technology company from the ground up — building brand identity, product vision, engineering team, and go-to-market strategy.</li>
+          <li>Leading enterprise AI solution development under the tagline "Clarity Through Intelligence."</li>
+          <li>Driving hiring, investor pitching, and business development across verticals.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span class="tag">AI / ML</span>
+          <span class="tag">Product Strategy</span>
+          <span class="tag">Team Building</span>
+          <span class="tag">Fundraising</span>
+          <span class="tag">Go-to-Market</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- KEY ACHIEVEMENTS -->
+<section id="achievements">
+  <p class="section-label fade-up">Impact</p>
+  <h2 class="section-heading fade-up">Key Achievements</h2>
+  <div class="ach-grid">
+    <div class="ach-card fade-up">
+      <div class="ach-icon">📐</div>
+      <p class="ach-title">Global Standardization</p>
+      <p class="ach-desc">Engineered BRD/FRD templates adopted across global projects, significantly reducing cross-team rework and communication gaps.</p>
+    </div>
+    <div class="ach-card fade-up">
+      <div class="ach-icon">⚡</div>
+      <p class="ach-title">20–30% Efficiency Gains</p>
+      <p class="ach-desc">Uncovered critical workflow discrepancies in core product modules, driving a 20–30% reduction in manual effort for enterprise clients.</p>
+    </div>
+    <div class="ach-card fade-up">
+      <div class="ach-icon">🧪</div>
+      <p class="ach-title">Testing Infrastructure</p>
+      <p class="ach-desc">Upgraded UAT efficiency by introducing standardized digital test case scenarios and strict RTM traceability metrics.</p>
+    </div>
+    <div class="ach-card fade-up">
+      <div class="ach-icon">🗄️</div>
+      <p class="ach-title">Data Accuracy</p>
+      <p class="ach-desc">Optimized backend reporting logic, improving system data accuracy and reducing database query load times across production systems.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label fade-up">Portfolio</p>
+  <h2 class="section-heading fade-up">Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card fade-up">
+      <p class="project-num">01</p>
+      <h3 class="project-name">TMS — Training Management System</h3>
+      <p class="project-desc">Mapped end-to-end training and induction workflows for SOP-based digital learning. Verified backend logic for quiz validation, compliance tracking, and reporting modules during production UAT.</p>
+      <span class="project-badge">Healthcare IT</span>
+    </div>
+
+    <div class="project-card fade-up">
+      <p class="project-num">02</p>
+      <h3 class="project-name">QEdge — Quality Management System</h3>
+      <p class="project-desc">Documented high-level workflows spanning compliance logic, document version control, and multi-tiered audit flows. Validated automated risk management modules end-to-end.</p>
+      <span class="project-badge">Life Sciences</span>
+    </div>
+
+    <div class="project-card fade-up">
+      <p class="project-num">03</p>
+      <h3 class="project-name">BizNet CTM — Clinical Trial Management</h3>
+      <p class="project-desc">Documented enhancement pipelines, verified updated stored procedures via backend SQL, and streamlined operational reporting infrastructure for clinical trial workflows.</p>
+      <span class="project-badge">Clinical / Compliance</span>
+    </div>
+
+    <div class="project-card fade-up">
+      <p class="project-num">04</p>
+      <h3 class="project-name">Clarivex.AI — AI-First Platform</h3>
+      <p class="project-desc">Founded and building an AI-first technology company from the ground up — brand, product, team, and enterprise client pipeline. Tagline: "Clarity Through Intelligence."</p>
+      <span class="project-badge">AI / Startup</span>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label fade-up">Capabilities</p>
+  <h2 class="section-heading fade-up">Skills & Tools</h2>
+  <div class="skills-grid">
+
+    <div class="fade-up">
+      <p class="skill-group-title">Business Analysis</p>
+      <div class="skill-chips">
+        <span class="chip">Requirement Elicitation</span>
+        <span class="chip">BRD / FRD / SRS</span>
+        <span class="chip">User Stories (BDD/Gherkin)</span>
+        <span class="chip">Epic & Feature Mapping</span>
+        <span class="chip">Gap Analysis</span>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <p class="skill-group-title">Agile & Scrum</p>
+      <div class="skill-chips">
+        <span class="chip">Distributed Scrum</span>
+        <span class="chip">Sprint Planning</span>
+        <span class="chip">Backlog Refinement</span>
+        <span class="chip">Sprint Reviews</span>
+        <span class="chip">Daily Stand-ups</span>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <p class="skill-group-title">Technical</p>
+      <div class="skill-chips">
+        <span class="chip">SQL</span>
+        <span class="chip">Data Mapping</span>
+        <span class="chip">API Documentation</span>
+        <span class="chip">ERD</span>
+        <span class="chip">Wireframing</span>
+        <span class="chip">Figma</span>
+        <span class="chip">Draw.io</span>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <p class="skill-group-title">Domain & Compliance</p>
+      <div class="skill-chips">
+        <span class="chip">Healthcare IT</span>
+        <span class="chip">Life Sciences</span>
+        <span class="chip">21 CFR Part 11</span>
+        <span class="chip">GAMP 5</span>
+        <span class="chip">QMS</span>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <p class="skill-group-title">UAT & QA</p>
+      <div class="skill-chips">
+        <span class="chip">Test Scenarios</span>
+        <span class="chip">Defect Logging</span>
+        <span class="chip">RTM</span>
+        <span class="chip">Stakeholder Sign-off</span>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <p class="skill-group-title">Tools</p>
+      <div class="skill-chips">
+        <span class="chip">JIRA</span>
+        <span class="chip">Confluence</span>
+        <span class="chip">MS Office</span>
+        <span class="chip">Slack</span>
+        <span class="chip">Teams</span>
+        <span class="chip">Zoom</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION & CERTIFICATIONS -->
+<section id="education">
+  <p class="section-label fade-up">Background</p>
+  <h2 class="section-heading fade-up">Education & Certifications</h2>
+  <div class="edu-cert-grid">
+
+    <div class="fade-up">
+      <p class="skill-group-title" style="margin-bottom:20px;">Education</p>
+      <div class="edu-list">
+        <div class="edu-item">
+          <div>
+            <p class="edu-degree">B.Tech in Computer Engineering</p>
+            <p class="edu-school">Marwadi University, Rajkot</p>
+          </div>
+          <span class="edu-year">2024</span>
+        </div>
+        <div class="edu-item">
+          <div>
+            <p class="edu-degree">Diploma in Computer Engineering</p>
+            <p class="edu-school">Marwadi University, Rajkot</p>
+          </div>
+          <span class="edu-year">2021</span>
+        </div>
+        <div class="edu-item">
+          <div>
+            <p class="edu-degree">SSC</p>
+            <p class="edu-school">TATA Chem DAV Public School, Mithapur</p>
+          </div>
+          <span class="edu-year">2018</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <p class="skill-group-title" style="margin-bottom:20px;">Certifications</p>
+      <div class="cert-list">
+        <div class="cert-item">
+          <div>
+            <p class="cert-name">Foundations of Project Management</p>
+            <p class="cert-issuer">Google</p>
+          </div>
+          <span class="cert-year">2024</span>
+        </div>
+        <div class="cert-item">
+          <div>
+            <p class="cert-name">Business Analysis & Process Management</p>
+            <p class="cert-issuer">Coursera</p>
+          </div>
+          <span class="cert-year">2024</span>
+        </div>
+        <div class="cert-item">
+          <div>
+            <p class="cert-name">UX Design Foundations</p>
+            <p class="cert-issuer">Google</p>
+          </div>
+          <span class="cert-year">2024</span>
+        </div>
+        <div class="cert-item">
+          <div>
+            <p class="cert-name">Cybersecurity Foundations</p>
+            <p class="cert-issuer">Google</p>
+          </div>
+          <span class="cert-year">2024</span>
+        </div>
+        <div class="cert-item">
+          <div>
+            <p class="cert-name">Academy Cloud Foundations</p>
+            <p class="cert-issuer">AWS</p>
+          </div>
+          <span class="cert-year">2023</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="resume-box fade-up">
+    <div class="resume-icon">📄</div>
+    <h2>Full Resume</h2>
+    <p>3 years of BA experience across Healthcare IT and Life Sciences,<br>plus founder context at Clarivex.AI.</p>
+    <div class="resume-specs">
+      <div class="resume-spec">
+        <span class="resume-spec-label">Format</span>
+        <span class="resume-spec-val">PDF</span>
+      </div>
+      <div class="resume-spec">
+        <span class="resume-spec-label">Pages</span>
+        <span class="resume-spec-val">3</span>
+      </div>
+      <div class="resume-spec">
+        <span class="resume-spec-label">Updated</span>
+        <span class="resume-spec-val">2026</span>
+      </div>
+    </div>
+    <!-- Replace href below with your actual resume PDF path/URL -->
+    <a href="Om_Bharadwa_Business_Analyst_Resume.pdf" class="btn-primary" download>Download PDF</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label fade-up">Say Hello</p>
+  <h2 class="section-heading fade-up">Get in Touch</h2>
+  <div class="contact-layout">
+
+    <div class="contact-info fade-up">
+      <p>
+        Whether you're a recruiter, hiring manager, or a founder looking to collaborate —
+        I'd love to connect. Open to conversations about BA roles, AI products, and 
+        building things that matter.
+      </p>
+      <div class="contact-links">
+        <a href="tel:+919265786549" class="contact-link">
+          <div class="contact-link-icon">📞</div>
+          +91 92657 86549
+        </a>
+        <a href="mailto:ombharadwa1336@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉</div>
+          ombharadwa1336@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/ombharadwa-084158173" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-icon">in</div>
+          linkedin.com/in/ombharadwa-084158173
+        </a>
+        <a href="https://clarivex.ai" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-icon">↗</div>
+          clarivex.ai
+        </a>
+      </div>
+    </div>
+
+    <form class="contact-form fade-up" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label class="form-label">Name</label>
+        <input class="form-input" type="text" placeholder="Your name" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" placeholder="your@email.com" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Subject</label>
+        <input class="form-input" type="text" placeholder="Opportunity / Collaboration / Other" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-textarea" placeholder="Tell me what you have in mind..." required></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="cursor:pointer;">Send Message</button>
+    </form>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-copy">© 2026 Om Bharadwa · Ahmedabad, India</p>
+  <p class="footer-name">Om Bharadwa</p>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Fade-up observer
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // Contact form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = 'Message Sent ✓';
+    btn.style.background = '#2A5C3F';
+    btn.style.color = '#A8D5B8';
+    setTimeout(() => {
+      btn.textContent = 'Send Message';
+      btn.style.background = '';
+      btn.style.color = '';
+      e.target.reset();
+    }, 3000);
+  }
+</script>
 </body>
 </html>
-
